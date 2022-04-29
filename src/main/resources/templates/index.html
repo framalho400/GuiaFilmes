@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<header th:replace="fragments/padrao :: cabecalho"></header>
+	<form action="login" method="post" style="padding: 100px">
+  
+  <div class="row" >
+      <div class="row">
+        <div class="input-field col s12">
+        <i class="material-icons prefix"></i>
+          <input id="email" type="email" name="email" class="validate">
+          <label for="email" class="active">Email</label>
+        </div>
+      </div>
+    
+  </div>
+  
+
+    
+      <div class="row" style="padding: 0px " >
+        <div class="input-field col s12">
+          <input id="email" type="password" name="senha" class="validate">
+          <label for="email" class="active">Senha</label>
+        </div>
+      </div>
+   
+  
+  <div th:replace="fragments/Mensagem">
+  
+  </div>
+  
+  <button  class="waves-effect waves-light btn" type="submit">enviar <i class="material-icons prefix"></i>
+  </button>
+   
+  
+  
+	</form>
+	

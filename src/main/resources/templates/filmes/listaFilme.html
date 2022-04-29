@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http//thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+</head>
+<body style="text-align: center;">
+	<header th:replace="fragments/padrao :: cabecalho"></header>
+
+	<table style="padding: 100px">
+
+
+
+		<form action="/tipo">
+			<label>palvra chave:</label> <input type="search" name="palavraChave">
+			<button type="submit">Buscar</button>
+		</form>
+
+		<thead>
+			<buttom type="submit" class="waves-effect waves-light btn-small">
+			<a th:href="@{../formFilme }"
+				style="text-decoration: none; color: white;">Cadastrar Filme</a></buttom>
+			<tr>
+				<th>ID</th>
+				<th>Nome</th>
+				<th>Genero</th>
+				<th>Descrição</th>
+				<th>Duração</th>
+				<th>Atores</th>
+				<th>Fotos</th>
+				<th>Idioma</th>
+				<th>Alterar</th>
+				<th>Excluir</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr th:each="filme:${filmes}">
+				<td th:text="${filme.id}" />
+				<td th:text="${filme.nome}" />
+				<td th:text="${filme.genero?.genero}" />
+				<td th:text="${filme.descricao}" />
+				<td th:text="${filme.duracao}" />
+				<td th:text="${filme.atores}" />
+				<td th:text="${filme.foto}" />
+				<td th:text="${filme.idioma}" />
+
+
+				<td><a th:href="@{/alterarFilme(id=${filme.id})}"><button>Alterar
+						</button></a></td>
+				<td><a th:href="@{/excluirFilme(id=${filme.id})}"><button>excluir</button></a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<ul class="pagination">
+		<li th:class="${pagAtual == 1 ? 'disabled' : 'waves-effect'}"><a
+			th:href="${pagAtual > 1 ? pagAtual -1 :'#'}"><i
+				class="material-icons">...<</i></a></li>
+
+		<li th:each="p:${numPaginas}"><a th:href="${p}"><span
+				th:text="${p}"></span></a>
+		<li th:class="${pagAtual == totalPags ? 'disabled' : 'waves-effect'}"
+			class="waves-effect"><a
+			th:href="${pagAtual < totalPags ? pagAtual + 1 : '#'}"> <i
+				class="material-icons">>...</i></a></li>
+	</ul>
+
+	<footer th:replace="fragments/Padrao :: footer"></footer>
+
+</body>
+</html>

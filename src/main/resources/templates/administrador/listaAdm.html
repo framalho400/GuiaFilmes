@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="https//thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	
+<title>Lista ADM</title>
+<style>
+.pagination {
+	text-align: center;
+}
+.Cadastro{
+margin-top: 20px;
+margin-left: 20px;
+}
+
+
+.nav-wrapper {
+	background-color: #292c37;
+	}
+</style>
+</head>
+
+<body>
+<header th:replace="fragments/padrao :: cabecalho"></header>
+	
+	<div class="Cadastro">
+				<buttom type="submit" class="waves-effect waves-light btn-small" ><a th:href="@{../formAdm }" style="text-decoration: none; color: white"  >Cadastrar Administrador</a></buttom>
+			</div>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Email</th>
+				<th>Alterar</th>
+				<th>Excluir</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="adm:${admins}">
+				<td th:text="${adm.id}" />
+				<td th:text="${adm.nome}" />
+				<td th:text="${adm.email}" />
+				<td><a th:href="@{/alterarAdm(id=${adm.id})}">Alterar</a></td>
+			<td><a
+				th:attr="onclick=|return confirm('Desaja excluir o administrador de ID: ${adm.id}')|"
+				th:href="@{/excluirAdm(id=${adm.id})}">Excluir</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<ul class="pagination">
+		<li th:class="${pagAtual == 1 ? 'disabled' : 'waves-effect'}">
+		<a th:href="${pagAtual > 1 ? pagAtual -1 :'#'}"><i class="material-icons">..Anterior</i></a></li>
+		
+			<li th:each="p:${numPaginas}">
+				<a th:href="${p}"><span th:text="${p}"></span></a>
+		
+		<li th:class="${pagAtual == totalPags ? 'disabled' : 'waves-effect'}" class="waves-effect">
+		<a th:href="${pagAtual < totalPags ? pagAtual + 1 : '#'}">
+		<i class="material-icons">Proximo..</i></a></li>
+	</ul>
+<!-- <footer th:repleace="fragment/padrao :: rodape"></footer> -->
+</body>
+</html>

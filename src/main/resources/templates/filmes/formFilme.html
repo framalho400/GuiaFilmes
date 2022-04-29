@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Cadastro Filme</title>
+</head>
+
+<body  >
+	<header th:replace="fragments/padrao :: cabecalho"></header>
+	
+	<form  class="col s12" style="padding: 100px" action="salvarFilme"
+		method="post" enctype="multipart/form-data">
+		
+		
+		<div class="row">
+		
+			<div th:replace="fragments/mensagem"></div>
+			<div class="input-field col s6">
+				<input placeholder="insira o nome:" type="text" class="validate" name="nome" th:value="${filme?.nome}"> <label
+					for="first_name">Nome</label>
+			</div>
+			</div>
+			<div class="row">
+			<div class="input-field col s3">
+				<select class=" browser-default" name="genero.id">
+					<option th:each="f: ${tipo}" th:text="${f.genero}"
+						th:value="${f.id}">Option 1</option>
+				</select>
+			</div>
+			</div>
+			<div class="row">
+			<div class="input-field col s12">
+				<input  placeholder="insira a descricao:" type="text" name="descricao" th:value="${filme?.descricao}" > <label>Descrição</label>
+			</div>
+			</div>
+			<div class="row">
+			<div class="input-field col s7">
+				<input  placeholder="insira os atores:" type="text"  name="atores" th:value="${filme?.atores}" > <label>Atores</label>
+			</div>
+			</div>
+			<div class="row">
+			<div class="input-field col s3">
+				<input placeholder="insira o idioma:" type="text" name="idioma" th:value="${filme?.idioma}" > <label>idioma</label>
+			</div>
+			</div>
+			<div class="row">
+			<div class="input-field col s2">
+				<input   placeholder="insira a duracao:" type="text"  name="duracao" th:value="${filme?.duracao}" > <label>Duração</label>
+			</div>
+			</div>
+			<div class="row">
+			<div class="input-field col s6">
+				<input type="date" name="datalancamento"  > <label>Data
+					de lançamento</label>
+			</div>
+			</div>
+			<input type="hidden" th:value="${filme?.foto}" name="foto">
+			<div class="row">
+			<div class="file-field input-field">
+					<div class="btn">
+						<span>File</span> <input type="file" multiple name="filecapa" accept="image/*" >
+					</div>
+					
+					<div class="file-path-wrapper">	
+						<input class="file-path validate" type="text"
+							placeholder="Upload one or more files">
+					</div>
+					</div>
+					<div th:if="${filme?.foto?.length > 0}" >
+					<h6>Fotos cadastradas:</h6>
+					<div>
+						<ul>
+							<li th:each="foto,i : ${filme?.verFotos()}">
+								<a th:href="${foto}" target="blank"><img th:src="${foto}"></a>
+								<a th:href="@{/excluirFotoFilme(idFilme=${filme?.id}, numFoto = ${i.index})}">
+								<i class="material-icons">delete_forever</i></a>
+								</li>
+						</ul>
+					</div>
+				</div>
+				<div class="input-field col s12" style="text-align: center;">
+			<button type="submit" class="waves-effect waves-light btn-small"
+				style="width: 200px; height: 50px">Salvar</button>
+
+		</div>
+			</div>
+			
+
+			
+	
+		
+	</form>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		
+
+</body>
+</html>

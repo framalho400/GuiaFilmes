@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="https//thymeleaf.org">
+<head>
+<title>Lista Genero</title>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<style>
+.pagination {
+	text-align: center;
+}
+
+.nav-wrapper {
+	background-color: #292c37;
+}
+
+</style>
+</head>
+
+
+<body>
+	<header th:replace="fragments/padrao :: cabecalho"></header>
+
+	<div style="padding: 50px">
+	<p class="flow-text">Lista Genero</p>
+		<form class="col s12" action="/palavraChave">
+			
+			<label>Buscar Genero :</label>
+			<div class="row">
+				<div class="input-field col s6">
+					<input  type="search" data-length="10"  name="palavraChave">
+					<buttom type="submit" class="waves-effect waves-light btn-small">Buscar</a>
+				</div>
+			</div>
+			
+			
+			<div class="Cadastro">
+				<buttom type="submit" class="waves-effect waves-light btn-small" ><a th:href="@{../formGenero }" style="text-decoration: none; color: white"  >Cadastrar Genero</a></buttom>
+			</div>
+
+		</form>
+
+
+
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Genero</th>
+					<th>Descrição</th>
+					<th>Alterar</th>
+					<th>Excluir</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="genero:${generos}">
+					<td th:text="${genero.id}" />
+					<td th:text="${genero.genero}" />
+					<td th:text="${genero.descricao}" />
+					<td><a th:href="@{/alterarGenero(id=${genero.id})}">Alterar</a></td>
+					<td><a
+						th:attr="onclick=|return confirm('Desaja excluir o filme de ID: ${genero.id}')|"
+						th:href="@{/excluirGenero(id=${genero.id})}">Excluir</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<ul class="pagination">
+			<li th:class="${pagAtual == 1 ? 'disabled' : 'waves-effect'}"><a
+				th:href="${pagAtual > 1 ? pagAtual -1 :'#'}"><i
+					class="material-icons">...<</i></a></li>
+
+			<li th:each="p:${numPaginas}"><a th:href="${p}"><span
+					th:text="${p}"></span></a>
+			<li th:class="${pagAtual == totalPags ? 'disabled' : 'waves-effect'}"
+				class="waves-effect"><a
+				th:href="${pagAtual < totalPags ? pagAtual + 1 : '#'}"> <i
+					class="material-icons">>...</i></a></li>
+		</ul>
+	</div>
+	<!-- <footer th:repleace="fragment/padrao :: rodape"></footer> -->
+</body>
+</html>

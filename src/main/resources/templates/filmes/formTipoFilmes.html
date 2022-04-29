@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org">
+<head>
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Cadastro de Genero</title>
+</head>
+<body style="padding: 100px;">
+
+<header th:replace="fragments/padrao :: cabecalho"></header>
+
+	
+	<div th:replace="fragments/mensagem"></div>
+    <form class="col s12" action="salvarGenero" method="post">
+      <div class="row">
+      <input type="hidden" name="id" th:value="${genero?.id}">
+        <div class="input-field col s6">
+          <input placeholder="Insira o genero:" type="text"  th:value="${genero?.genero}"  type="text" class="input"
+		  name="genero">
+          <label for="first_name"> Genero</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Insira a descrição:" th:value="${genero?.descricao}" type="text" class="input"
+		  name="descricao">
+          <label for="disabled">Descrição</label>
+        </div>
+        </div>
+		<div class="group">
+			<button type="submit"class="waves-effect waves-light btn-small" name="salvar">Salvar</button>
+		</div>
+     
+    </form>
+  <script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
